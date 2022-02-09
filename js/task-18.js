@@ -20,9 +20,10 @@
 // class="lazyload" and data-src это для тех браузеров которые не поддерживают ленивую загрузку нативно
 
 if ("loading" in HTMLImageElement.prototype) {
+  // figure detection (поддерживает ли браузер атрибут loading - для ленивых изображений)
   console.log("Браузер поддерживает ленивки");
 
-  const lazyImages = document.querySelector('img[loading="lazy"]');
+  const lazyImages = document.querySelectorAll('img[loading="lazy"]');
 
   lazyImages.forEach((img) => {
     img.src = img.dataset.src;
@@ -37,15 +38,15 @@ if ("loading" in HTMLImageElement.prototype) {
 
   document.body.appendChild(script);
 }
-// Если браузер поддерживает ленивую лзагрузку изображений нативно (из коробки) выполняется код в if, если браузер не поддерживает ленивку с коробки, тогда подключаем библиотеку и динамично вешаем скрип в боди.
-//
-//
-//
-//
-// lazyImages.forEach((image) => {
-//   image.addEventListener("load", onImageLoaded, { once: true }); // для каждой картинки вешаем событие загрузки. {once: true} - после того как картинка загрузилась и функция отработала один раз, слушание самоудаляется и не висит больше
-// });
 
-// function onImageLoaded(evt) {
-//   evt.target.classList.add("appear");
-// } // добавляем класс для загрузившейся картинки
+const lazyImages = document.querySelectorAll("img[data-src]");
+
+lazyImages.forEach((image) => {
+  image.addEventListener("load", onImageLoaded, { once: true });
+}); // для каждой картинки вешаем событие загрузки. {once: true} - после того как картинка загрузилась и функция отработала один раз, слушание самоудаляется и не висит больше
+
+function onImageLoaded(evt) {
+  evt.target.classList.add("appear");
+} // добавляем класс для загрузившейся картинки
+
+// Если браузер поддерживает ленивую лзагрузку изображений нативно (из коробки) выполняется код в if, если браузер не поддерживает ленивку с коробки, тогда подключаем библиотеку и динамично вешаем скрип в боди.
