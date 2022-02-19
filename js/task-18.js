@@ -71,23 +71,23 @@ function onImageLoaded(evt) {
 
 // renderGallery();
 
-// function renderGallery() {
-//   const markup = images
-//     .map(
-//       (image) => `
-//     <li>
-//         <img
-//         class="lazyload"
-//         src="../images/lqip-image.jpeg"   //При первой загрузке страницы сначала загружает  розмытую картинку (подготовленную), вместо всех, а при скроле вниз отрисовывает нужные
-//         data-src="../images/${image}"
-//         alt="cat"
-//         width="900"
-//         height="900"
-//         />
-//     </li>
-//   `
-//     )
-//     .join("");
+function renderGallery() {
+  const markup = images
+    .map(
+      (image) => `
+    <li>
+        <img
+        class="lazyload"
+        src="../images/lqip-image.jpeg"   //При первой загрузке страницы сначала загружает  розмытую картинку (подготовленную), вместо всех, а при скроле вниз отрисовывает нужные
+        data-src="../images/${image}"
+        alt="cat"
+        width="900"
+        height="900"
+        />
+    </li>
+  `
+    )
+    .join("");
 
-//   imageGallery.insertAdjacentHTML("beforeend", markup);
-// }
+  imageGallery.insertAdjacentHTML("beforeend", markup);
+}
